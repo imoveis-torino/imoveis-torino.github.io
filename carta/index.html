@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="logo-navy.png">
+<title>Carta de apresentação – Imóveis Torino</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1b2f5b;--navy2:#13224a;--blue:#3a5a9b;--soft:#eef2f9;--bg:#f5f7fb;--card:#fff;--line:#dfe5ef;--muted:#6a7590}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--navy2);line-height:1.5;-webkit-font-smoothing:antialiased}
+  header{background:#fff;padding:28px 18px 26px;text-align:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--navy)}
+  header h1{font-family:Montserrat,Inter,sans-serif;font-size:21px;margin:14px 0 6px;font-weight:700;color:var(--navy);letter-spacing:-.2px}
+  header p{margin:0 auto;font-size:14.5px;color:var(--muted);max-width:340px}
+  .badge{display:inline-block;margin-top:14px;font-size:11.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--navy);background:var(--soft);padding:6px 12px;border-radius:999px}
+  main{max-width:680px;margin:0 auto;padding:18px 16px 110px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(19,34,74,.04),0 6px 18px rgba(19,34,74,.05)}
+  .card h2{font-family:Montserrat,Inter,sans-serif;font-size:16px;margin:0 0 6px;display:flex;gap:10px;align-items:center;color:var(--navy)}
+  .n{background:var(--navy);color:#fff;border-radius:10px;width:28px;height:28px;display:inline-grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var(--navy2)}
+  .hint{font-weight:400;color:var(--muted)}
+  input,select{width:100%;font:inherit;font-size:16px;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--navy2);transition:border-color .15s, box-shadow .15s;-webkit-appearance:none;appearance:none}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231b2f5b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+  input::placeholder{color:#a9b2c5}
+  input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,90,155,.15)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chips label{margin:0;display:flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:500;cursor:pointer;background:#fff;transition:all .15s}
+  .chips input{width:auto;margin:0;accent-color:#fff}
+  .chips label:has(input:checked){background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chips input,.pet .chk input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+  .chips label,.pet .chk{position:relative}
+  .chips label:has(input:checked)::before,.pet .chk:has(input:checked)::before{content:"✓";font-weight:700}
+  .hide{display:none!important}
+  #letter .lh{font-family:Inter,sans-serif;font-size:14px;color:var(--navy);display:inline-block;margin-top:2px}
+  .hero{background:radial-gradient(120% 90% at 10% 0%,#2b4a8f 0%,#1b2f5b 45%,#101c3d 100%);color:#fff;padding:34px 20px 30px;text-align:center;position:relative;overflow:hidden;border:0}
+  .hero::after{display:none}
+  .hero h1{color:#fff;font-size:25px;line-height:1.2;margin:18px 0 10px;position:relative}
+  .hero p{color:rgba(255,255,255,.82);position:relative;max-width:360px}
+  .grad{background:linear-gradient(90deg,#7fb2ff,#ff9a7a,#ffd166);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .logoimg{position:relative}
+  .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px;position:relative}
+  .pills span{font-size:12px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 11px;border-radius:999px;backdrop-filter:blur(4px)}
+  .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:float 9s ease-in-out infinite}
+  .b1{width:180px;height:180px;background:#4f8cff;top:-50px;left:-40px}
+  .b2{width:160px;height:160px;background:#ff7a59;bottom:-60px;right:-30px;animation-delay:-3s}
+  .b3{width:120px;height:120px;background:#ec4899;top:40%;left:70%;opacity:.35;animation-delay:-6s}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-14px)}}
+  .progress{position:sticky;top:0;z-index:25;background:rgba(245,247,251,.92);backdrop-filter:blur(8px);padding:12px 16px 10px;border-bottom:1px solid var(--line)}
+  .pbar{height:6px;background:#e3e8f2;border-radius:99px;overflow:hidden;max-width:648px;margin:0 auto}
+  .pbar i{display:block;height:100%;width:0;border-radius:99px;transition:width .4s ease, background .4s}
+  .dots{display:flex;justify-content:space-between;max-width:648px;margin:10px auto 0}
+  .dots button{width:36px;height:36px;padding:0;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:17px;filter:grayscale(1);opacity:.55;transition:all .2s}
+  .dots button.on{filter:none;opacity:1;border-color:var(--acc)}
+  .dots button.cur{background:var(--acc);border-color:var(--acc);transform:scale(1.12);box-shadow:0 6px 14px rgba(0,0,0,.15)}
+  .step{display:none}
+  .step.active{display:block;animation:in .35s ease}
+  @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .card{border-top:5px solid var(--acc)}
+  .sh{display:flex;gap:12px;align-items:center;margin-bottom:4px}
+  .ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:color-mix(in srgb,var(--acc) 16%,#fff);flex:none}
+  .ico.big{width:54px;height:54px;font-size:28px;background:rgba(255,255,255,.15)}
+  .kicker{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--acc)}
+  .sh h2,.card .sh h2{margin:2px 0 0;font-size:18px}
+  .sub{margin:2px 0 0;font-size:13px;color:var(--muted)}
+  .card .chips label:has(input:checked),.card .pet .chk:has(input:checked){background:var(--acc);border-color:var(--acc)}
+  .card input:focus,.card select:focus{border-color:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 20%,transparent)}
+  .out .top{display:flex;gap:12px;align-items:center;background:linear-gradient(120deg,#1b2f5b,#2b4a8f 60%,#4f8cff)}
+  .out .top .kicker{color:#ffd166}
+  .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);justify-content:center}
+  .nav button{max-width:320px}
+  .nav .back{background:#fff;border:1.5px solid var(--line);color:var(--navy);flex:0 0 auto}
+  .nav .next{flex:1;color:#fff;border:0;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:background .3s}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+  #confetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+  @keyframes fall{to{top:105vh;transform:rotate(720deg) translateX(40px)}}
+  .wm{bottom:78px}
+  .lock .blob{z-index:0}
+  .pets{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .pet{display:flex;gap:8px;align-items:center}
+  .pet .chk{flex:1;margin:0;display:flex;align-items:center;gap:9px;border:1.5px solid var(--line);border-radius:12px;padding:10px 13px;font-weight:500;cursor:pointer;transition:all .15s}
+  .pet .chk input{width:auto;margin:0;accent-color:#fff}
+  .pet .chk:has(input:checked){background:var(--navy);color:#fff;border-color:var(--navy)}
+  .pet .qty{width:80px}
+  .out{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(19,34,74,.12);border:1px solid var(--line);scroll-margin-top:12px}
+  .out .top{background:var(--navy);color:#fff;padding:16px 18px}
+  .out .top h2{margin:0;font-family:Montserrat,Inter,sans-serif;font-size:17px}
+  .out .top p{margin:4px 0 0;font-size:13px;opacity:.8}
+  .out .body{padding:16px}
+  .paper{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 20px;box-shadow:inset 0 0 0 6px #fafbfd}
+  .paper img{width:54px;display:block;margin:0 0 14px auto;opacity:.9}
+  .subj{font-size:13.5px;color:var(--muted);margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+  #letter{white-space:pre-wrap;font-family:Georgia,'Times New Roman',serif;font-size:15.5px;line-height:1.6;color:#1d2433}
+  .btns{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  button{font:inherit;font-weight:600;border-radius:12px;padding:13px 16px;cursor:pointer;transition:transform .1s, background .15s}
+  button:active{transform:scale(.98)}
+  .primary{background:var(--navy);color:#fff;border:0;flex:1}
+  .primary:hover{background:var(--navy2)}
+  .secondary{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .toast{font-size:13px;color:#1f7a3d;margin-top:8px;min-height:18px;font-weight:600}
+  .tip{font-size:13px;color:var(--muted);margin-top:6px;background:var(--soft);border-radius:10px;padding:10px 12px}
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:6px 0 30px}
+  footer img{width:40px;display:block;margin:0 auto 6px;opacity:.7}
+  .logoimg{height:auto;display:block;margin:0 auto;pointer-events:none}
+  .fab{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:30;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-weight:600;box-shadow:0 8px 24px rgba(19,34,74,.3)}
+  .lock{position:fixed;inset:0;background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .lock .box{background:#fff;border-radius:20px;padding:26px 22px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+  .lock strong{font-family:Montserrat,Inter,sans-serif;font-size:17px;color:var(--navy)}
+  .lock p{font-size:14px;color:var(--muted);margin:6px 0 16px}
+  .lock .err{color:#b3261e;font-size:13px;min-height:18px;margin-top:8px}
+  body.locked main, body.locked header, body.locked footer, body.locked .nav, body.locked .progress{filter:blur(8px);pointer-events:none}
+  main, header, footer{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  input, select, #letter{-webkit-user-select:text;user-select:text}
+  .wm{position:fixed;bottom:6px;right:10px;font-size:10.5px;color:rgba(27,47,91,.35);pointer-events:none;z-index:20}
+</style>
+</head>
+<body class="locked">
+<div class="lock" id="lock"><span class="blob b1"></span><span class="blob b2"></span><img src="logo-white.png" alt="Imóveis Torino" class="logoimg" style="width:120px;margin-bottom:22px;position:relative" draggable="false"><div class="box" style="position:relative">
+  <div style="font-size:30px;margin-bottom:6px">🔐</div><strong>Acesso exclusivo para clientes</strong>
+  <p>Digite o código que você recebeu da Imóveis Torino.</p>
+  <input id="code" placeholder="Código de acesso" autocomplete="off" style="text-align:center;text-transform:uppercase">
+  <button class="primary" id="enter" style="width:100%;margin-top:10px">Entrar</button>
+  <div class="err" id="err"></div>
+</div></div>
+<div class="wm">© Imóveis Torino · uso exclusivo de clientes</div>
+<header class="hero">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <img src="logo-white.png" alt="Imóveis Torino" class="logoimg" style="width:118px" draggable="false">
+  <h1>Sua carta de apresentação<br><span class="grad">em 3 minutos</span></h1>
+  <p>Responda em português e receba a carta pronta em italiano.</p>
+  <div class="pills"><span>🇧🇷 Responde em português</span><span>🇮🇹 Carta em italiano</span><span>⚡ Pronta na hora</span></div>
+</header>
+<div class="progress" id="progress"><div class="pbar"><i id="pfill"></i></div><div class="dots" id="dots"></div></div>
+<main>
+<form id="f" autocomplete="on">
+
+  <div class="card step" data-step="0" style="--acc:#4f8cff">
+    <div class="sh"><span class="ico">👋</span><div><div class="kicker">Passo 1 de 7</div><h2>Sobre você</h2><p class="sub">Vamos começar pelo básico.</p></div></div>
+    <div class="row">
+      <div><label>Nome e sobrenome</label><input name="nome" placeholder="Maria Silva"></div>
+      <div><label>Idade</label><input name="idade" type="number" inputmode="numeric" placeholder="30"></div>
+    </div>
+    <div class="row">
+      <div><label>Você é</label>
+        <select name="genero"><option value="f">Mulher</option><option value="m">Homem</option></select></div>
+      <div><label>Nacionalidade</label>
+        <select name="naz">
+          <option value="brasiliana|brasiliano">Brasileira</option>
+          <option value="italiana|italiano">Italiana</option>
+          <option value="portoghese|portoghese">Portuguesa</option>
+          <option value="argentina|argentino">Argentina</option>
+          <option value="uruguaiana|uruguaiano">Uruguaia</option>
+          <option value="paraguaiana|paraguaiano">Paraguaia</option>
+          <option value="colombiana|colombiano">Colombiana</option>
+          <option value="venezuelana|venezuelano">Venezuelana</option>
+          <option value="peruviana|peruviano">Peruana</option>
+          <option value="cilena|cileno">Chilena</option>
+          <option value="boliviana|boliviano">Boliviana</option>
+          <option value="ecuadoriana|ecuadoriano">Equatoriana</option>
+          <option value="cubana|cubano">Cubana</option>
+          <option value="messicana|messicano">Mexicana</option>
+          <option value="angolana|angolano">Angolana</option>
+          <option value="mozambicana|mozambicano">Moçambicana</option>
+          <option value="capoverdiana|capoverdiano">Cabo-verdiana</option>
+          <option value="spagnola|spagnolo">Espanhola</option>
+          <option value="francese|francese">Francesa</option>
+          <option value="statunitense|statunitense">Americana (EUA)</option>
+          <option value="__outro">Outra</option>
+        </select></div>
+    </div>
+    <div class="hide outro" data-for="naz"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="nazOutro"></div>
+    <label>Você já mora em Turim?</label>
+    <div class="chips">
+      <label><input type="radio" name="mora" value="si" checked> Já moro</label>
+      <label><input type="radio" name="mora" value="no"> Vou me mudar</label>
+    </div>
+    <div id="moraSi"><label>Há quanto tempo?</label>
+      <select name="tempo">
+        <option value="qualche mese">Menos de 6 meses</option>
+        <option value="circa 6 mesi">Cerca de 6 meses</option>
+        <option value="circa un anno">Cerca de 1 ano</option>
+        <option value="2 anni">2 anos</option>
+        <option value="3 anni">3 anos</option>
+        <option value="4 anni">4 anos</option>
+        <option value="5 anni">5 anos</option>
+        <option value="più di 5 anni">Mais de 5 anos</option>
+      </select></div>
+    <div id="moraNo" class="hide"><label>Quando chega?</label>
+      <div class="row"><select name="chegMes" class="mes"></select><select name="chegAno" class="ano"></select></div></div>
+  </div>
+
+  <div class="card step" data-step="1" style="--acc:#ff7a59">
+    <div class="sh"><span class="ico">🏠</span><div><div class="kicker">Passo 2 de 7</div><h2>O apartamento</h2><p class="sub">Onde e quando você quer morar.</p></div></div>
+    <div class="row">
+      <div><label>Bairro</label>
+        <select name="zona">
+          <option value="">Qualquer / não sei</option>
+          <option>Centro</option><option>Crocetta</option><option>San Salvario</option><option>Vanchiglia</option>
+          <option>Borgo Po</option><option>Cit Turin</option><option>San Donato</option><option>Campidoglio</option>
+          <option>Cenisia</option><option>San Paolo</option><option>Pozzo Strada</option><option>Santa Rita</option>
+          <option>Mirafiori</option><option>Lingotto</option><option>Nizza Millefonti</option><option>Aurora</option>
+          <option>Barriera di Milano</option><option>Regio Parco</option><option>Borgo Vittoria</option>
+          <option>Madonna di Campagna</option><option>Parella</option><option>Lucento</option><option>Vallette</option>
+          <option>Madonna del Pilone</option><option>Sassi</option>
+          <option value="__outro">Outro</option>
+        </select><div class="hide outro" data-for="zona"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="zonaOutro"></div></div>
+      <div><label>Aluguel <span class="hint">(€/mês, opcional)</span></label><input name="preco" type="number" inputmode="numeric" placeholder="750"></div>
+    </div>
+    <label>Endereço do apartamento <span class="hint">(se souber, ex: Corso Francesco Ferrucci 99)</span></label>
+    <input name="indirizzo" placeholder="Via / Corso ... número">
+    <label>Quer entrar</label>
+    <div class="row">
+      <select name="ingMes" class="mes" data-first="subito|O quanto antes"></select>
+      <select name="ingAno" class="ano"></select>
+    </div>
+    <label>Por que está procurando casa?</label>
+    <select name="motivo">
+      <option value="auto">Escolha automática</option>
+      <option value="perché mi sto trasferendo a Torino">Estou me mudando para Turim</option>
+      <option value="per essere più vicin@ al lavoro">Quero ficar perto do trabalho</option>
+      <option value="per essere più vicin@ all'università">Quero ficar perto da faculdade</option>
+      <option value="perché ho bisogno di più spazio">Preciso de mais espaço</option>
+      <option value="perché desidero vivere in modo più indipendente">Quero morar sozinho(a)</option>
+      <option value="perché la mia famiglia sta crescendo">A família está crescendo</option>
+      <option value="perché il mio contratto attuale è in scadenza">Meu contrato atual está acabando</option>
+      <option value="per trovare una casa stabile dove stabilirmi">Quero uma casa fixa, sem mudar mais</option>
+      <option value="__outro">Outro motivo</option>
+    </select>
+    <div class="hide outro" data-for="motivo"><label>Qual o motivo? <span class="hint">(se puder, em italiano)</span></label><input name="motivoOutro"></div>
+    <label>Por quanto tempo?</label>
+    <select name="durata">
+      <option value="lungo">Longo prazo</option>
+      <option value="12">Pelo menos 1 ano</option>
+      <option value="6">Pelo menos 6 meses</option></select>
+  </div>
+
+  <div class="card step" data-step="2" style="--acc:#2fbf8a">
+    <div class="sh"><span class="ico">💼</span><div><div class="kicker">Passo 3 de 7</div><h2>Trabalho e renda</h2><p class="sub">Isso dá segurança ao proprietário.</p></div></div>
+    <div class="chips">
+      <label><input type="radio" name="lavoro" value="dip" checked> Contratado(a)</label>
+      <label><input type="radio" name="lavoro" value="aut"> Autônomo(a) / empresa</label>
+      <label><input type="radio" name="lavoro" value="stu"> Estudante</label>
+      <label id="nessunoChip" class="hide"><input type="radio" name="lavoro" value="none"> Ainda não / não informar</label>
+    </div>
+    <div id="dipBox">
+      <div class="row">
+        <div><label>Profissão</label>
+          <select name="ruolo">
+            <option value="cameriera|cameriere">Garçom / garçonete</option>
+            <option value="cuoca|cuoco">Cozinheiro(a)</option>
+            <option value="aiuto cuoca|aiuto cuoco">Ajudante de cozinha</option>
+            <option value="sushi chef|sushi chef">Sushiman</option>
+            <option value="barista|barista">Barista / bartender</option>
+            <option value="lavapiatti|lavapiatti">Lavador(a) de pratos</option>
+            <option value="receptionist|receptionist">Recepcionista</option>
+            <option value="addetta alle pulizie|addetto alle pulizie">Limpeza</option>
+            <option value="commessa|commesso">Vendedor(a) de loja</option>
+            <option value="cassiera|cassiere">Caixa</option>
+            <option value="magazziniera|magazziniere">Estoquista / armazém</option>
+            <option value="operaia|operaio">Operário(a)</option>
+            <option value="muratrice|muratore">Pedreiro(a)</option>
+            <option value="elettricista|elettricista">Eletricista</option>
+            <option value="autista|autista">Motorista</option>
+            <option value="rider|rider">Entregador(a)</option>
+            <option value="badante|badante">Cuidador(a) de idosos</option>
+            <option value="babysitter|babysitter">Babá</option>
+            <option value="infermiera|infermiere">Enfermeiro(a)</option>
+            <option value="operatrice socio-sanitaria (OSS)|operatore socio-sanitario (OSS)">Técnico(a) de saúde (OSS)</option>
+            <option value="parrucchiera|parrucchiere">Cabeleireiro(a)</option>
+            <option value="estetista|estetista">Esteticista</option>
+            <option value="impiegata amministrativa|impiegato amministrativo">Administrativo / escritório</option>
+            <option value="insegnante|insegnante">Professor(a)</option>
+            <option value="sviluppatrice software|sviluppatore software">Desenvolvedor(a)</option>
+            <option value="ingegnera|ingegnere">Engenheiro(a)</option>
+            <option value="architetta|architetto">Arquiteto(a)</option>
+            <option value="__outro">Outra profissão</option>
+          </select><div class="hide outro" data-for="ruolo"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="ruoloOutro"></div></div>
+        <div><label>Empresa <span class="hint">(nome)</span></label><input name="azienda" placeholder="Ristorante XYZ"></div>
+      </div>
+      <label>Tipo de contrato</label>
+      <select name="contratto">
+        <option value="ind">Indeterminato (sem prazo)</option>
+        <option value="det">Determinato (com prazo)</option>
+        <option value="app">Apprendistato</option></select>
+      <div id="detBox" class="hide"><label>Até quando?</label>
+        <div class="row"><select name="scadMes" class="mes"></select><select name="scadAno" class="ano"></select></div></div>
+    </div>
+    <div id="autBox" class="hide">
+      <div class="row">
+        <div><label>O que você faz</label>
+          <select name="attivita">
+            <option value="libera professionista|libero professionista">Profissional liberal</option>
+            <option value="consulente|consulente">Consultor(a)</option>
+            <option value="imprenditrice|imprenditore">Empresário(a)</option>
+            <option value="commerciante|commerciante">Comerciante / loja</option>
+            <option value="sviluppatrice software|sviluppatore software">Desenvolvedor(a)</option>
+            <option value="designer|designer">Designer</option>
+            <option value="fotografa|fotografo">Fotógrafo(a)</option>
+            <option value="traduttrice|traduttore">Tradutor(a)</option>
+            <option value="content creator|content creator">Criador(a) de conteúdo</option>
+            <option value="esperta di marketing digitale|esperto di marketing digitale">Marketing digital</option>
+            <option value="parrucchiera|parrucchiere">Cabeleireiro(a)</option>
+            <option value="estetista|estetista">Esteticista</option>
+            <option value="artigiana|artigiano">Artesão(ã)</option>
+            <option value="agente immobiliare|agente immobiliare">Corretor(a) de imóveis</option>
+            <option value="__outro">Outro</option>
+          </select><div class="hide outro" data-for="attivita"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="attivitaOutro"></div></div>
+        <div><label>Há quantos anos?</label>
+          <select name="anniAut">
+            <option value="meno di un anno">Menos de 1</option><option value="un anno">1</option>
+            <option value="2 anni">2</option><option value="3 anni">3</option><option value="4 anni">4</option>
+            <option value="5 anni">5</option><option value="più di 5 anni">Mais de 5</option>
+            <option value="più di 10 anni">Mais de 10</option>
+          </select></div>
+      </div>
+    </div>
+    <div id="stuBox" class="hide">
+      <div class="row">
+        <div><label>Curso</label>
+          <select name="corso">
+            <option value="Architettura">Arquitetura</option><option value="Ingegneria">Engenharia</option>
+            <option value="Design">Design</option><option value="Economia">Economia</option>
+            <option value="Informatica">Informática</option><option value="Medicina">Medicina</option>
+            <option value="Giurisprudenza">Direito</option><option value="Lingue e letterature straniere">Línguas</option>
+            <option value="Scienze politiche">Ciências políticas</option><option value="Psicologia">Psicologia</option>
+            <option value="un master">Mestrado / master</option><option value="un dottorato">Doutorado</option>
+            <option value="un corso di lingua italiana">Curso de italiano</option>
+            <option value="__outro">Outro</option>
+          </select><div class="hide outro" data-for="corso"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="corsoOutro"></div></div>
+        <div><label>Onde</label>
+          <select name="uni">
+            <option value="al Politecnico di Torino">Politecnico di Torino</option>
+            <option value="all'Università di Torino">Università di Torino</option>
+            <option value="allo IAAD">IAAD</option><option value="allo IED Torino">IED Torino</option>
+            <option value="all'ESCP Business School">ESCP</option>
+            <option value="all'Accademia Albertina">Accademia Albertina</option>
+            <option value="al Conservatorio di Torino">Conservatorio</option>
+            <option value="__outro">Outra escola</option>
+          </select><div class="hide outro" data-for="uni"><label>Qual? <span class="hint">(se puder, em italiano)</span></label><input name="uniOutro"></div></div>
+      </div>
+    </div>
+    <div id="redBox"><label>Renda líquida por mês <span class="hint">(€, opcional)</span></label>
+    <input name="reddito" type="number" inputmode="numeric" placeholder="1600"></div>
+    <label>Tem garante (fiador)?</label>
+    <div class="chips">
+      <label><input type="radio" name="garante" value="no" checked> Não</label>
+      <label><input type="radio" name="garante" value="si"> Sim</label>
+    </div>
+  </div>
+
+  <div class="card step" data-step="3" style="--acc:#f5a524">
+    <div class="sh"><span class="ico">🐾</span><div><div class="kicker">Passo 4 de 7</div><h2>Quem vai morar</h2><p class="sub">Pessoas e bichinhos da casa.</p></div></div>
+    <select name="chi">
+      <option value="sola">Só eu</option>
+      <option value="coppia">Eu e meu/minha parceiro(a)</option>
+      <option value="famiglia">Minha família</option>
+      <option value="amici">Eu e amigos/colegas</option></select>
+    <div id="partBox" class="hide"><label>Nome e sobrenome do(a) parceiro(a)</label><input name="partner" placeholder="João Silva"></div>
+    <div id="numBox" class="hide"><label>Quantas pessoas no total?</label>
+      <select name="num"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
+    <label>Animais <span class="hint">(marque quantos quiser)</span></label>
+    <div class="pets">
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="cp" data-sg="cane di piccola taglia" data-pl="cani di piccola taglia"> Cachorro pequeno</label><select name="q_cp" class="qty hide"><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="cm" data-sg="cane di media taglia" data-pl="cani di media taglia"> Cachorro médio</label><select name="q_cm" class="qty hide"><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="cg" data-sg="cane di grande taglia" data-pl="cani di grande taglia"> Cachorro grande</label><select name="q_cg" class="qty hide"><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="ga" data-sg="gatto" data-pl="gatti"> Gato</label><select name="q_ga" class="qty hide"><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="pa" data-sg="piccolo animale domestico" data-pl="piccoli animali domestici"> Animal pequeno (gaiola)</label><select name="q_pa" class="qty hide"><option>1</option><option>2</option><option>3</option></select></div>
+      <div class="pet"><label class="chk"><input type="checkbox" name="pet" value="__outro"> Outro</label></div>
+    </div>
+    <div class="hide outro" data-for="pet"><label>Qual animal? <span class="hint">(se puder, em italiano)</span></label><input name="petOutro"></div>
+    <label>Fuma?</label>
+    <div class="chips">
+      <label><input type="radio" name="fuma" value="no" checked> Não</label>
+      <label><input type="radio" name="fuma" value="si"> Sim</label>
+    </div>
+  </div>
+
+  <div class="card step" data-step="4" style="--acc:#8b5cf6">
+    <div class="sh"><span class="ico">📄</span><div><div class="kicker">Passo 5 de 7</div><h2>Documentos e garantias</h2><p class="sub">O que deixa o proprietário tranquilo.</p></div></div>
+    <label>Permesso di soggiorno</label>
+    <select name="permesso">
+      <option value="ok">Tenho, válido</option>
+      <option value="ric">Está saindo / renovando (tenho a ricevuta)</option>
+      <option value="ue">Sou cidadã(o) europeia(u), não preciso</option></select>
+    <label>Pode dar referências? <span class="hint">(empregador ou proprietário anterior)</span></label>
+    <div class="chips">
+      <label><input type="radio" name="ref" value="si" checked> Sim</label>
+      <label><input type="radio" name="ref" value="no"> Não</label>
+    </div>
+    <label>Já alugou casa na Itália?</label>
+    <select name="storico">
+      <option value="">Não / prefiro não dizer</option>
+      <option value="si">Sim, sempre paguei em dia</option>
+      <option value="lungo">Sim, morei anos no mesmo lugar</option>
+    </select>
+    <label>O que você pode oferecer? <span class="hint">(marque quantos quiser)</span></label>
+    <div class="chips">
+      <label><input type="checkbox" name="gar" value="dep" checked> Pago a caução na hora</label>
+      <label><input type="checkbox" name="gar" value="ant"> Posso adiantar meses</label>
+      <label><input type="checkbox" name="gar" value="reg" checked> Contrato registrado</label>
+      <label><input type="checkbox" name="gar" value="bon"> Pagamento por bonifico automático</label>
+    </div>
+  </div>
+
+  <div class="card step" data-step="5" style="--acc:#ec4899">
+    <div class="sh"><span class="ico">✨</span><div><div class="kicker">Passo 6 de 7</div><h2>Perfil e contato</h2><p class="sub">Curto e profissional.</p></div></div>
+    <label>Como você se descreveria? <span class="hint">(até 4)</span></label>
+    <div class="chips">
+      <label><input type="checkbox" name="q" value="responsabile|responsabile|responsabili" checked> Responsável</label>
+      <label><input type="checkbox" name="q" value="puntuale nei pagamenti|puntuale nei pagamenti|puntuali nei pagamenti" checked> Pontual nos pagamentos</label>
+      <label><input type="checkbox" name="q" value="ordinata|ordinato|ordinati" checked> Organizada(o)</label>
+      <label><input type="checkbox" name="q" value="tranquilla|tranquillo|tranquilli" checked> Tranquila(o)</label>
+      <label><input type="checkbox" name="q" value="rispettosa del vicinato|rispettoso del vicinato|rispettosi del vicinato"> Respeita os vizinhos</label>
+    </div>
+    <div class="row">
+      <div><label>Telefone</label><input name="tel" type="tel" placeholder="+39 ..."></div>
+      <div><label>E-mail</label><input name="email" type="email" placeholder="nome@email.com"></div>
+    </div>
+  </div>
+</form>
+
+<div class="out step" id="out" data-step="6" style="--acc:#1b2f5b">
+  <div class="top"><span class="ico big">🎉</span><div><div class="kicker">Passo 7 de 7</div><h2>Sua carta está pronta!</h2><p>Leia, copie e envie ao proprietário junto com seus documentos.</p></div></div>
+  <div class="body">
+  <div class="paper">
+  <img src="logo-navy.png" alt="" draggable="false">
+  <div class="subj" id="subj"></div>
+  <div id="letter"></div>
+  </div>
+  <div class="btns">
+    <button class="primary" id="copy">Copiar carta</button>
+    <button class="secondary" id="copySubj">Copiar assunto</button>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="tip">Leia antes de enviar. Mande junto com: documento, codice fiscale e comprovante de renda.</div>
+  </div>
+</div>
+</main>
+<div class="nav" id="nav"><button class="back" id="back">← Voltar</button><button class="next" id="next">Próximo →</button></div>
+<div id="confetti"></div>
+<footer><img src="logo-navy.png" alt="" draggable="false">@imoveistorino</footer>
+
+<script>
+const MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const Y = new Date().getFullYear();
+document.querySelectorAll('select.mes').forEach(s => {
+  let h = '';
+  if (s.dataset.first){ const [v,l] = s.dataset.first.split('|'); h += `<option value="${v}">${l}</option>`; }
+  h += MESI.map((m,i) => `<option value="${m}">${MESES[i]}</option>`).join('');
+  s.innerHTML = h;
+  if (!s.dataset.first) s.value = MESI[(new Date().getMonth()+1)%12];
+});
+document.querySelectorAll('select.ano').forEach(s => {
+  s.innerHTML = [Y, Y+1, Y+2, Y+3].map(y => `<option>${y}</option>`).join('');
+  if (new Date().getMonth() === 11) s.value = String(Y+1);
+});
+
+const f = document.getElementById('f');
+const val = n => { const e = f.elements[n]; return e ? (e.value || '').trim() : ''; };
+const radio = n => { const e = f.querySelector(`input[name="${n}"]:checked`); return e ? e.value : ''; };
+const show = (id, on) => document.getElementById(id).classList.toggle('hide', !on);
+
+function build(){
+  const m = val('genero') === 'm';
+  const A = (fe, ma) => m ? ma : fe;
+  const G = v => { const p = v.split('|'); return m ? (p[1] || p[0]) : p[0]; };
+  const O = n => val(n) === '__outro' ? (val(n+'Outro') || '[...]') : G(val(n));
+  document.querySelectorAll('.outro').forEach(d => {
+    const n = d.dataset.for;
+    const on = n === 'pet' ? !!f.querySelector('input[name="pet"][value="__outro"]:checked') : val(n) === '__outro';
+    d.classList.toggle('hide', !on);
+  });
+  f.querySelectorAll('input[name="pet"]').forEach(c => { const q = f.elements['q_'+c.value]; if (q) q.classList.toggle('hide', !c.checked); });
+
+  const mora = radio('mora'); show('moraSi', mora==='si'); show('moraNo', mora==='no');
+  show('nessunoChip', mora==='no');
+  if (mora !== 'no' && radio('lavoro') === 'none') f.querySelector('input[name="lavoro"][value="dip"]').checked = true;
+  const lav = radio('lavoro'); show('dipBox', lav==='dip'); show('autBox', lav==='aut'); show('stuBox', lav==='stu');
+  show('redBox', lav!=='none');
+  show('detBox', val('contratto')==='det');
+  const chi = val('chi'); show('numBox', chi==='famiglia' || chi==='amici'); show('partBox', chi==='coppia');
+  const ingSubito = val('ingMes') === 'subito';
+  f.elements['ingAno'].style.visibility = ingSubito ? 'hidden' : 'visible';
+
+  const nome = val('nome') || '[Nome Cognome]';
+  const zona = val('zona') === '__outro' ? val('zonaOutro') : val('zona');
+  const addr = val('indirizzo');
+  const dove = addr ? `sito in ${addr}` : (zona ? `in zona ${zona}` : 'a Torino');
+  const checked = n => [...f.querySelectorAll(`input[name="${n}"]:checked`)].map(e => e.value);
+  const lista = a => a.length > 1 ? a.slice(0,-1).join(', ') + ' e ' + a[a.length-1] : (a[0] || '');
+  const partner = val('partner');
+  const pl = chi === 'coppia';               // noi
+  const X = (io, noi) => pl ? noi : io;
+  const GP = v => { const p = v.split('|'); return pl ? p[0] : G(v); };
+  const coppiaNomi = pl ? `${nome} e ${partner || '[Nome Cognome]'}` : nome;
+
+  const P = [];
+  const H = t => P.push('§' + t);
+  P.push('Gentile Proprietario / Gentile Agenzia,');
+
+  // apertura
+  let ap;
+  if (pl){
+    ap = `siamo ${coppiaNomi}, una coppia ${mora === 'si' ? `che vive a Torino da ${val('tempo')}` : 'prossima a trasferirsi stabilmente a Torino'}, e desideriamo sottoporre`;
+  } else {
+    ap = `mi chiamo ${nome}${val('idade') ? `, ho ${val('idade')} anni` : ''} e sono di nazionalità ${O('naz')}. `;
+    ap += mora === 'si' ? `Vivo a Torino da ${val('tempo')} e desidero sottoporre` : `Sono ${A('prossima','prossimo')} a trasferirmi stabilmente a Torino e desidero sottoporre`;
+  }
+  ap += ` alla Vostra attenzione la ${X('mia','nostra')} candidatura per la locazione dell'appartamento ${dove}.`;
+  P.push(ap);
+
+  // profilo
+  H('Profilo personale e professionale');
+  let pr = '';
+  const red = val('reddito');
+  const chiLav = pl ? `${nome.split(' ')[0]} ` : '';
+  const v3 = (io, lui) => pl ? lui : io;
+  if (lav === 'dip'){
+    const ct = {ind:'a tempo indeterminato', det:`a tempo determinato fino a ${val('scadMes')} ${val('scadAno')}`, app:'di apprendistato'}[val('contratto')];
+    const az = val('azienda');
+    pr = `${chiLav}${v3('Lavoro','lavora')} come ${O('ruolo')}${az ? ` presso ${az}` : ''}, con contratto ${ct}`;
+    pr += red ? `, e ${v3('percepisco','percepisce')} un reddito netto mensile di circa ${red} €, stabile e documentabile.` : `, e ${v3('dispongo','dispone')} di un reddito stabile e documentabile.`;
+  } else if (lav === 'aut'){
+    pr = `${chiLav}${v3('Lavoro','lavora')} in modo autonomo come ${O('attivita')} da ${val('anniAut')}`;
+    pr += red ? `, con un reddito medio mensile di circa ${red} €, stabile e documentabile.` : ', con un reddito stabile e documentabile.';
+  } else if (lav === 'stu'){
+    const c = O('corso');
+    const u = val('uni') === '__outro' ? `presso ${val('uniOutro') || '[...]'}` : val('uni');
+    pr = c === 'un corso di lingua italiana' ? `${chiLav}${v3('Frequento','frequenta')} un corso di lingua italiana ${u}.`
+       : `${chiLav}${v3(`Sono ${A('studentessa','studente')}`, `è ${A('studentessa','studente')}`)} di ${c} ${u}.`;
+    if (red) pr += ` ${v3('Dispongo','Dispone')} di circa ${red} € al mese.`;
+  }
+  if (pr) pr = pr.charAt(0).toUpperCase() + pr.slice(1) + ' ';
+  const qs = checked('q').slice(0,4).map(GP);
+  if (radio('fuma') === 'no') qs.push(pl ? 'non fumatrice' : A('non fumatrice','non fumatore'));
+  if (qs.length) pr += pl ? `Siamo una coppia ${lista(qs)}. ` : `Sono una persona ${lista(qs)}. `;
+  if (chi === 'famiglia') pr += `L'appartamento sarà abitato dalla mia famiglia, composta da ${val('num')} persone. `;
+  if (chi === 'amici') pr += `L'appartamento sarà condiviso da ${val('num')} persone. `;
+  const NUM = {1:'un',2:'due',3:'tre'};
+  const pets = []; let tot = 0;
+  f.querySelectorAll('input[name="pet"]:checked').forEach(c => {
+    if (c.value === '__outro'){ pets.push(val('petOutro') || '[...]'); tot += 1; return; }
+    const q = +val('q_'+c.value); tot += q;
+    pets.push(q === 1 ? `un ${c.dataset.sg}` : `${NUM[q]} ${c.dataset.pl}`);
+  });
+  if (pets.length) pr += `Con ${X('me','noi')} ${tot > 1 ? 'vivranno' : 'vivrà'} anche ${lista(pets)}, ${tot > 1 ? 'tranquilli e abituati' : 'tranquillo e abituato'} a vivere in appartamento.`;
+  P.push(pr.trim());
+
+  // referenze e garanzie
+  H('Referenze e garanzie');
+  const docs = {dip:'contratto di lavoro, buste paga, documentazione fiscale ed estratti conto', aut:'dichiarazione dei redditi, documentazione fiscale ed estratti conto', stu:'documentazione relativa alle entrate ed estratti conto', none:'estratti conto e documentazione fiscale'}[lav];
+  let rg = `${X('Posso','Possiamo')} fornire tutta la documentazione necessaria a dimostrare la ${X('mia','nostra')} situazione professionale e reddituale, inclusi ${docs}${radio('ref') === 'si' ? ', oltre a referenze' : ''}.`;
+  if (radio('garante') === 'si') rg += ` ${X('Posso','Possiamo')} inoltre presentare un garante.`;
+  const sto = val('storico');
+  if (sto) rg += ` ${X(`Ho già vissuto`, `Abbiamo già vissuto`)} in affitto in Italia${sto === 'lungo' ? ' per diversi anni' : ''}, rispettando sempre puntualmente i pagamenti.`;
+  const gar = checked('gar'); const g = [];
+  if (gar.includes('dep')) g.push('versare il deposito cauzionale alla firma');
+  if (gar.includes('ant')) g.push('anticipare alcune mensilità');
+  if (gar.includes('bon')) g.push('effettuare i pagamenti tramite bonifico automatico');
+  if (gar.includes('reg')) g.push('sottoscrivere un regolare contratto registrato');
+  if (g.length) rg += ` ${X(`Sono ${A('disponibile','disponibile')}`, 'Siamo disponibili')} a ${lista(g)}.`;
+  if (val('permesso') === 'ric') rg += ` Il ${X('mio','nostro')} permesso di soggiorno è in fase di rilascio/rinnovo; ${X('allego','alleghiamo')} la relativa ricevuta.`;
+  P.push(rg);
+
+  // motivazione
+  H('Motivazione');
+  let mot = val('motivo'); let mv = '';
+  if (mot === 'auto') mot = mora === 'no' ? 'trasf' : '';
+  if (mot === 'trasf' || mot === 'perché mi sto trasferendo a Torino') mv = `${X('Sto trasferendo la mia','Stiamo trasferendo la nostra')} residenza e il ${X('mio','nostro')} progetto di vita a Torino. `;
+  else if (mot) {
+    if (mot === '__outro') mot = val('motivoOutro') ? `perché ${val('motivoOutro')}` : '';
+    mot = mot.replace('@', pl ? 'i' : A('a','o'));
+    if (pl) mot = mot.replace('ho bisogno','abbiamo bisogno').replace('desidero','desideriamo').replace('il mio contratto','il nostro contratto').replace('dove stabilirmi','dove stabilirci');
+    if (mot) mv = `${X('Sto cercando','Stiamo cercando')} casa ${mot}. `;
+  }
+  const dur = {lungo:'un\'abitazione stabile da trattare con la stessa cura della ' + X('mia','nostra') + ' casa, con l\'intenzione di instaurare un rapporto di locazione duraturo', '12':'un\'abitazione per almeno 12 mesi, da trattare con la stessa cura della ' + X('mia','nostra') + ' casa', '6':'un\'abitazione per almeno 6 mesi, da trattare con la stessa cura della ' + X('mia','nostra') + ' casa'}[val('durata')];
+  mv += `${X('Cerco','Cerchiamo')} ${dur}. `;
+  mv += `${X(`Sarei ${A('interessata','interessato')}`, 'Saremmo interessati')} ad entrare nell'appartamento ${ingSubito ? 'il prima possibile' : `a partire da ${val('ingMes')} ${val('ingAno')}`}. `;
+  mv += `${X('Garantisco','Garantiamo')} la massima cura dell'immobile, puntualità nei pagamenti e pieno rispetto della proprietà, del condominio e dei vicini.`;
+  P.push(mv);
+
+  P.push(`${X('Ringrazio','Ringraziamo')} per l'attenzione riservata alla ${X('mia','nostra')} candidatura e ${X('resto','restiamo')} a disposizione per qualsiasi ulteriore informazione o documentazione.`);
+  const contatti = [val('tel'), val('email')].filter(Boolean).join(' · ');
+  P.push(`Cordiali saluti,\n${pl ? `${nome} | ${partner || '[Nome Cognome]'}` : nome}${contatti ? '\n' + contatti : ''}`);
+
+  const text = P.map(x => x.startsWith('§') ? x.slice(1) : x).join('\n\n');
+  const esc = t => t.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const html = P.map(x => x.startsWith('§') ? `<b class="lh">${esc(x.slice(1))}</b>` : esc(x)).join('\n\n');
+  const L = document.getElementById('letter'); L.innerHTML = html; L.dataset.text = text;
+  document.getElementById('subj').textContent = `Oggetto: Candidatura per la locazione dell'appartamento ${dove}`;
+}
+
+async function copy(text, msg){
+  const t = document.getElementById('toast');
+  try { await navigator.clipboard.writeText(text); t.textContent = msg; }
+  catch(e){
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('letter'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    t.textContent = 'Texto selecionado: use "Copiar" do seu celular.';
+  }
+  setTimeout(() => t.textContent = '', 3000);
+}
+document.getElementById('copy').onclick = () => copy(document.getElementById('letter').dataset.text, 'Carta copiada ✅');
+document.getElementById('copySubj').onclick = () => copy(document.getElementById('subj').textContent.replace('Oggetto: ',''), 'Assunto copiado ✅');
+f.addEventListener('input', build); f.addEventListener('change', build);
+build();
+const stepsEl=[...document.querySelectorAll('.step')].sort((a,b)=>a.dataset.step-b.dataset.step);
+const ICONS=['👋','🏠','💼','🐾','📄','✨','🎉'];
+const dots=document.getElementById('dots');
+dots.innerHTML=stepsEl.map((e,i)=>`<button type="button" data-go="${i}" style="--acc:${e.style.getPropertyValue('--acc')}">${ICONS[i]}</button>`).join('');
+let cur=0;
+function go(i){
+  cur=Math.max(0,Math.min(stepsEl.length-1,i));
+  stepsEl.forEach((e,k)=>{e.classList.toggle('active',k===cur);});
+  document.getElementById('pfill').style.width=((cur)/(stepsEl.length-1)*100)+'%';
+  document.getElementById('pfill').style.background=stepsEl[cur].style.getPropertyValue('--acc');
+  dots.querySelectorAll('button').forEach((d,k)=>{d.classList.toggle('on',k<=cur);d.classList.toggle('cur',k===cur);});
+  document.getElementById('back').style.visibility=cur===0?'hidden':'visible';
+  const nx=document.getElementById('next');
+  nx.textContent=cur===stepsEl.length-2?'Ver minha carta 🎉':(cur===stepsEl.length-1?'Copiar carta 📋':'Próximo →');
+  nx.style.background=stepsEl[cur].style.getPropertyValue('--acc');
+  if(cur===stepsEl.length-1) confetti();
+  const top=document.getElementById('progress').getBoundingClientRect().top+scrollY-4;
+  if(scrollY>top) scrollTo({top,behavior:'smooth'});
+}
+document.getElementById('back').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>{ if(cur===stepsEl.length-1) document.getElementById('copy').click(); else go(cur+1); };
+dots.onclick=e=>{const b=e.target.closest('button'); if(b) go(+b.dataset.go);};
+function confetti(){
+  const box=document.getElementById('confetti'); box.innerHTML='';
+  const C=['#4f8cff','#ff7a59','#2fbf8a','#f5a524','#8b5cf6','#ec4899','#1b2f5b'];
+  for(let i=0;i<70;i++){const p=document.createElement('i');
+    p.style.left=Math.random()*100+'vw'; p.style.background=C[i%C.length];
+    p.style.animationDelay=(Math.random()*.6)+'s'; p.style.animationDuration=(1.8+Math.random()*1.4)+'s';
+    p.style.transform=`rotate(${Math.random()*360}deg)`; box.appendChild(p);}
+  setTimeout(()=>box.innerHTML='',3800);
+}
+go(0);
+
+const CODE_HASH = '62238d33e2a2d6e4405750b887820c56fb25136bc0cb3b80b08344e1de210a50';
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function unlock(){const l=document.getElementById('lock'); if(l) l.remove(); document.body.classList.remove('locked');}
+try{ if(sessionStorage.getItem('it_ok')===CODE_HASH) unlock(); }catch(e){}
+async function tryCode(){
+  const v=(document.getElementById('code').value||'').trim().toUpperCase();
+  if(await sha(v)===CODE_HASH){ try{sessionStorage.setItem('it_ok',CODE_HASH)}catch(e){} unlock(); }
+  else document.getElementById('err').textContent='Código incorreto. Fale com a Imóveis Torino.';
+}
+if(document.getElementById('enter')){document.getElementById('enter').onclick=tryCode;
+document.getElementById('code').addEventListener('keydown',e=>{if(e.key==='Enter')tryCode()});}
+document.addEventListener('contextmenu',e=>{ if(!e.target.closest('input,select,#letter')) e.preventDefault(); });
+document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p')) e.preventDefault(); });
+</script>
+</body>
+</html>
