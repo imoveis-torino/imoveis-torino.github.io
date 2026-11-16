@@ -654,12 +654,10 @@ document.getElementById('code').addEventListener('keydown',e=>{if(e.key==='Enter
 document.addEventListener('contextmenu',e=>{ if(!e.target.closest('input,select,#letter')) e.preventDefault(); });
 document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p')) e.preventDefault(); });
 </script>
-  <!-- Imóveis Torino · envia a carta preenchida para a planilha.
-     Cole este bloco logo antes de </body> no arquivo da página /carta
-     e troque COLE_AQUI_A_URL pela URL do Apps Script (termina em /exec). -->
+<!-- Imóveis Torino · envia a carta preenchida para a planilha Google (Apps Script). -->
 <script>
 (function () {
-  var URL_PLANILHA = 'COLE_AQUI_A_URL';
+  var URL_PLANILHA = 'https://script.google.com/macros/s/AKfycbyQeGHZB9ZVMgnDPiAx6VJTQwTRMWWCl3oS5PdknEwlyVAyIUcxaFRiQ7GMF37uiLPoKw/exec';
   var enviado = false;
 
   // aviso de privacidade (GDPR) no topo da página
@@ -702,6 +700,7 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
     }
     return dados;
   }
+
   function enviar() {
     if (enviado || URL_PLANILHA.indexOf('http') !== 0) return;
     enviado = true;
@@ -714,9 +713,65 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
   }
 
   // envia quando aparece "Sua carta está pronta!"
+  // ---------- botão "Baixar PDF" ao lado de "Copiar carta" ----------
+  function textoCarta() {
+    var maior = '';
+    document.querySelectorAll('textarea, pre, [class*="carta"], [id*="carta"]').forEach(function (el) {
+      var txt = (el.value || el.innerText || '').trim();
+      if (txt.length > maior.length) maior = txt;
+    });
+    return maior;
+  }
+
+  function carregarJsPDF(cb) {
+    if (window.jspdf) return cb();
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = cb;
+    s.onerror = function () { window.print(); }; // plano B: imprimir / salvar como PDF
+    document.head.appendChild(s);
+  }
+
+  function baixarPDF() {
+    var texto = textoCarta();
+    if (!texto) return;
+    carregarJsPDF(function () {
+      var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+      var margem = 20, larg = 170, altLinha = 6, y = margem;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(11);
+      texto.split('\n').forEach(function (par) {
+        var linhas = par.trim() ? doc.splitTextToSize(par, larg) : [''];
+        linhas.forEach(function (l) {
+          if (y > 297 - margem) { doc.addPage(); y = margem; }
+          doc.text(l, margem, y);
+          y += altLinha;
+        });
+      });
+      doc.save('Carta de presentazione.pdf');
+    });
+  }
+
+  function colocarBotaoPDF() {
+    if (document.getElementById('btn-pdf-carta')) return;
+    var copiar = Array.prototype.find.call(document.querySelectorAll('button, a'), function (b) {
+      return /Copiar carta/i.test(b.innerText) && b.offsetParent !== null;
+    });
+    if (!copiar) return;
+    var b = document.createElement('button');
+    b.id = 'btn-pdf-carta';
+    b.type = 'button';
+    b.className = copiar.className;
+    b.textContent = 'Baixar PDF';
+    b.style.marginLeft = '8px';
+    b.addEventListener('click', function () { enviar(); baixarPDF(); });
+    copiar.insertAdjacentElement('afterend', b);
+  }
+
   new MutationObserver(function () {
-    if (!enviado && /Sua carta est[áa] pronta/i.test(document.body.innerText)) {
-      setTimeout(enviar, 300);
+    if (/Sua carta est[áa] pronta/i.test(document.body.innerText)) {
+      colocarBotaoPDF();
+      if (!enviado) setTimeout(enviar, 300);
     }
   }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true });
 
