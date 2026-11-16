@@ -654,5 +654,78 @@ document.getElementById('code').addEventListener('keydown',e=>{if(e.key==='Enter
 document.addEventListener('contextmenu',e=>{ if(!e.target.closest('input,select,#letter')) e.preventDefault(); });
 document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='p')) e.preventDefault(); });
 </script>
+  <!-- Imóveis Torino · envia a carta preenchida para a planilha.
+     Cole este bloco logo antes de </body> no arquivo da página /carta
+     e troque COLE_AQUI_A_URL pela URL do Apps Script (termina em /exec). -->
+<script>
+(function () {
+  var URL_PLANILHA = 'COLE_AQUI_A_URL';
+  var enviado = false;
+
+  // aviso de privacidade (GDPR) no topo da página
+  var aviso = document.createElement('p');
+  aviso.style.cssText = 'font-size:12px;opacity:.75;max-width:640px;margin:8px auto;padding:0 16px;';
+  aviso.textContent = 'Ao preencher, suas respostas são enviadas à Imóveis Torino e usadas só para ajudar na sua busca de imóvel. Para apagar seus dados, é só pedir no direct.';
+  document.body.insertBefore(aviso, document.body.firstChild);
+
+  function rotulo(el) {
+    if (el.id) {
+      var l = document.querySelector('label[for="' + el.id + '"]');
+      if (l) return l.innerText.trim();
+    }
+    var pai = el.closest('label');
+    if (pai) return pai.innerText.replace(el.value || '', '').trim();
+    return el.getAttribute('aria-label') || el.placeholder || el.name || el.id || 'campo';
+  }
+
+  function coletar() {
+    var dados = {};
+    document.querySelectorAll('input, select, textarea').forEach(function (el) {
+      var t = (el.type || '').toLowerCase();
+      if (['button', 'submit', 'hidden', 'password'].indexOf(t) > -1) return;
+      if ((t === 'radio' || t === 'checkbox') && !el.checked) return;
+      var k = rotulo(el).slice(0, 80);
+      if (/c[óo]digo/i.test(k)) return; // não salva o código de acesso
+      var v = el.value;
+      if (!v) return;
+      dados[k] = dados[k] ? dados[k] + ', ' + v : v;
+    });
+    // texto da carta gerada (maior bloco de texto da tela final)
+    var maior = '';
+    document.querySelectorAll('textarea, pre, [class*="carta"], [id*="carta"]').forEach(function (el) {
+      var txt = (el.value || el.innerText || '').trim();
+      if (txt.length > maior.length) maior = txt;
+    });
+    if (maior) {
+      Object.keys(dados).forEach(function (k) { if (dados[k] === maior) delete dados[k]; });
+      dados['Carta gerada'] = maior;
+    }
+    return dados;
+  }
+  function enviar() {
+    if (enviado || URL_PLANILHA.indexOf('http') !== 0) return;
+    enviado = true;
+    fetch(URL_PLANILHA, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(coletar())
+    }).catch(function () { enviado = false; });
+  }
+
+  // envia quando aparece "Sua carta está pronta!"
+  new MutationObserver(function () {
+    if (!enviado && /Sua carta est[áa] pronta/i.test(document.body.innerText)) {
+      setTimeout(enviar, 300);
+    }
+  }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true });
+
+  // garantia extra: também envia ao clicar em "Copiar carta"
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button, a');
+    if (b && /Copiar carta/i.test(b.innerText)) enviar();
+  }, true);
+})();
+</script>
 </body>
 </html>
