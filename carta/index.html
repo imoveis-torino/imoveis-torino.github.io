@@ -666,14 +666,32 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
   aviso.textContent = 'Ao preencher, suas respostas são enviadas à Imóveis Torino e usadas só para ajudar na sua busca de imóvel. Para apagar seus dados, é só pedir no direct.';
   document.body.insertBefore(aviso, document.body.firstChild);
 
+  function limpa(t) { return (t || '').replace(/\(.*?\)/g, '').replace(/\s+/g, ' ').trim(); }
+
+  // pergunta = <label> sem input que vem antes do campo (ou do bloco dele)
   function rotulo(el) {
     if (el.id) {
       var l = document.querySelector('label[for="' + el.id + '"]');
-      if (l) return l.innerText.trim();
+      if (l) return limpa(l.innerText);
     }
-    var pai = el.closest('label');
-    if (pai) return pai.innerText.replace(el.value || '', '').trim();
+    var n = el;
+    for (var d = 0; d < 5 && n; d++) {
+      var p = n.previousElementSibling;
+      while (p) {
+        if (p.tagName === 'LABEL' && !p.querySelector('input, select, textarea')) return limpa(p.innerText);
+        p = p.previousElementSibling;
+      }
+      n = n.parentElement;
+    }
     return el.getAttribute('aria-label') || el.placeholder || el.name || el.id || 'campo';
+  }
+
+  // valor legível (texto da opção escolhida, não o código interno)
+  function valor(el) {
+    var t = (el.type || '').toLowerCase();
+    if (el.tagName === 'SELECT') return el.selectedIndex > 0 || el.value ? limpa(el.options[el.selectedIndex].text) : '';
+    if (t === 'radio' || t === 'checkbox') { var lb = el.closest('label'); return lb ? limpa(lb.innerText) || el.value : el.value; }
+    return el.value;
   }
 
   function coletar() {
@@ -682,20 +700,17 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
       var t = (el.type || '').toLowerCase();
       if (['button', 'submit', 'hidden', 'password'].indexOf(t) > -1) return;
       if ((t === 'radio' || t === 'checkbox') && !el.checked) return;
+      if (el.closest('.hide')) return; // pergunta escondida (não se aplica)
       var k = rotulo(el).slice(0, 80);
       if (/c[óo]digo/i.test(k)) return; // não salva o código de acesso
-      var v = el.value;
+      var v = valor(el);
       if (!v) return;
       dados[k] = dados[k] ? dados[k] + ', ' + v : v;
     });
-    // texto da carta gerada (maior bloco de texto da tela final)
-    var maior = '';
-    document.querySelectorAll('textarea, pre, [class*="carta"], [id*="carta"]').forEach(function (el) {
-      var txt = (el.value || el.innerText || '').trim();
-      if (txt.length > maior.length) maior = txt;
-    });
+    var maior = textoCarta();
     if (maior) {
       Object.keys(dados).forEach(function (k) { if (dados[k] === maior) delete dados[k]; });
+      var ass = assuntoCarta(); if (ass) dados['Assunto'] = ass;
       dados['Carta gerada'] = maior;
     }
     return dados;
@@ -715,12 +730,19 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
   // envia quando aparece "Sua carta está pronta!"
   // ---------- botão "Baixar PDF" ao lado de "Copiar carta" ----------
   function textoCarta() {
+    var L = document.getElementById('letter');
+    if (L) return ((L.dataset && L.dataset.text) || L.innerText || '').trim();
     var maior = '';
     document.querySelectorAll('textarea, pre, [class*="carta"], [id*="carta"]').forEach(function (el) {
       var txt = (el.value || el.innerText || '').trim();
       if (txt.length > maior.length) maior = txt;
     });
     return maior;
+  }
+
+  function assuntoCarta() {
+    var s = document.getElementById('subj');
+    return s ? s.innerText.trim() : '';
   }
 
   function carregarJsPDF(cb) {
@@ -734,12 +756,19 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
 
   function baixarPDF() {
     var texto = textoCarta();
-    if (!texto) return;
+    if (!texto) { alert('Não encontrei a carta. Preencha até o fim e tente de novo.'); return; }
     carregarJsPDF(function () {
       var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
       var margem = 20, larg = 170, altLinha = 6, y = margem;
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(11);
+      var assunto = assuntoCarta();
+      if (assunto) {
+        doc.setFont('helvetica', 'bold');
+        doc.splitTextToSize(assunto, larg).forEach(function (l) { doc.text(l, margem, y); y += altLinha; });
+        doc.setFont('helvetica', 'normal');
+        y += altLinha;
+      }
       texto.split('\n').forEach(function (par) {
         var linhas = par.trim() ? doc.splitTextToSize(par, larg) : [''];
         linhas.forEach(function (l) {
@@ -754,7 +783,7 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
 
   function colocarBotaoPDF() {
     if (document.getElementById('btn-pdf-carta')) return;
-    var copiar = Array.prototype.find.call(document.querySelectorAll('button, a'), function (b) {
+    var copiar = document.getElementById('copy') || Array.prototype.find.call(document.querySelectorAll('button, a'), function (b) {
       return /Copiar carta/i.test(b.innerText) && b.offsetParent !== null;
     });
     if (!copiar) return;
