@@ -120,8 +120,6 @@
 <div class="lock" id="lock"><span class="blob b1"></span><span class="blob b2"></span><img src="logo-white.png" alt="Imóveis Torino" class="logoimg" style="width:120px;margin-bottom:22px;position:relative" draggable="false"><div class="box" style="position:relative">
   <div style="font-size:30px;margin-bottom:6px">🔐</div><strong>Acesso exclusivo para clientes</strong>
   <p>Digite o código que você recebeu da Imóveis Torino.</p>
-  <input id="lnome" placeholder="Seu nome e sobrenome" autocomplete="name" style="text-align:center;margin-bottom:8px">
-  <input id="ltel" type="tel" placeholder="Seu WhatsApp (+39 / +55 ...)" autocomplete="tel" style="text-align:center;margin-bottom:8px">
   <input id="code" placeholder="Código de acesso" autocomplete="off" style="text-align:center;text-transform:uppercase">
   <button class="primary" id="enter" style="width:100%;margin-top:10px">Entrar</button>
   <div class="err" id="err"></div>
@@ -648,12 +646,9 @@ function unlock(){const l=document.getElementById('lock'); if(l) l.remove(); doc
 try{ if(sessionStorage.getItem('it_ok')===CODE_HASH) unlock(); }catch(e){}
 async function tryCode(){
   const v=(document.getElementById('code').value||'').trim().toUpperCase();
-  const ln=(document.getElementById('lnome').value||'').trim(), lt=(document.getElementById('ltel').value||'').trim();
-  if(ln.length<3||lt.replace(/\D/g,'').length<8){ document.getElementById('err').textContent='Preencha seu nome e WhatsApp.'; return; }
   if(await sha(v)===CODE_HASH){
     try{sessionStorage.setItem('it_ok',CODE_HASH)}catch(e){}
-    f.elements['nome'].value=ln; f.elements['tel'].value=lt; build();
-    if(window.itRegistrarEntrada) window.itRegistrarEntrada(ln,lt);
+    if(window.itRegistrarEntrada) window.itRegistrarEntrada();
     unlock(); }
   else document.getElementById('err').textContent='Código incorreto. Fale com a Imóveis Torino.';
 }
@@ -736,12 +731,12 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
     }).catch(function () { enviado = false; });
   }
 
-  // registra quem entrou (nome + WhatsApp), mesmo que não termine a carta
-  window.itRegistrarEntrada = function (nome, tel) {
+  // registra cada entrada (data/hora), mesmo que não termine a carta
+  window.itRegistrarEntrada = function () {
     if (URL_PLANILHA.indexOf('http') !== 0) return;
     fetch(URL_PLANILHA, { method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ 'Etapa': 'Entrou no app', 'Nome e sobrenome': nome, 'Telefone': tel,
+      body: JSON.stringify({ 'Etapa': 'Entrou no app',
         'Data/hora': new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' }) }) }).catch(function(){});
   };
 
