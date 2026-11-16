@@ -506,7 +506,7 @@ function build(){
   if (pl){
     ap = `siamo ${coppiaNomi}, una coppia ${mora === 'si' ? `che vive a Torino da ${val('tempo')}` : 'prossima a trasferirsi stabilmente a Torino'}, e desideriamo sottoporre`;
   } else {
-    ap = `mi chiamo ${nome}${val('idade') ? `, ho ${val('idade')} anni` : ''} e sono di nazionalità ${O('naz')}. `;
+    ap = `mi chiamo ${nome}${val('idade') ? `, ho ${val('idade')} anni` : ''}ap = `mi chiamo ${nome}${val('idade') ? `, ho ${val('idade')} anni` : ''}. `;. `;
     ap += mora === 'si' ? `Vivo a Torino da ${val('tempo')} e desidero sottoporre` : `Sono ${A('prossima','prossimo')} a trasferirmi stabilmente a Torino e desidero sottoporre`;
   }
   ap += ` alla Vostra attenzione la ${X('mia','nostra')} candidatura per la locazione dell'appartamento ${dove}.`;
