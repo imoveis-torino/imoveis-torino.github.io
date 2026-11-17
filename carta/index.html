@@ -648,7 +648,6 @@ async function tryCode(){
   const v=(document.getElementById('code').value||'').trim().toUpperCase();
   if(await sha(v)===CODE_HASH){
     try{sessionStorage.setItem('it_ok',CODE_HASH)}catch(e){}
-    if(window.itRegistrarEntrada) window.itRegistrarEntrada();
     unlock(); }
   else document.getElementById('err').textContent='Código incorreto. Fale com a Imóveis Torino.';
 }
@@ -698,26 +697,56 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
   }
 
   function coletar() {
-    var dados = {};
-    document.querySelectorAll('input, select, textarea').forEach(function (el) {
-      var t = (el.type || '').toLowerCase();
-      if (['button', 'submit', 'hidden', 'password'].indexOf(t) > -1) return;
-      if ((t === 'radio' || t === 'checkbox') && !el.checked) return;
-      if (el.closest('.hide')) return; // pergunta escondida (não se aplica)
-      var k = rotulo(el).slice(0, 80);
-      if (/c[óo]digo/i.test(k)) return; // não salva o código de acesso
-      var v = valor(el);
-      if (!v) return;
-      dados[k] = dados[k] ? dados[k] + ', ' + v : v;
-    });
-    var maior = textoCarta();
-    if (maior) {
-      Object.keys(dados).forEach(function (k) { if (dados[k] === maior) delete dados[k]; });
-      var ass = assuntoCarta(); if (ass) dados['Assunto'] = ass;
-      dados['Carta gerada'] = maior;
-      dados['Etapa'] = 'Carta pronta';
-    }
-    return dados;
+    var F = document.getElementById('f');
+    function el(n) { return F.elements[n]; }
+    function txt(n) { var e = el(n); if (!e) return ''; if (e.tagName === 'SELECT') { var o = e.options[e.selectedIndex]; return o ? limpa(o.text) : ''; } return (e.value || '').trim(); }
+    function outro(n) { var e = el(n); return e && e.value === '__outro' ? (txt(n + 'Outro') || 'Outro') : txt(n); }
+    function rad(n) { var e = F.querySelector('input[name="' + n + '"]:checked'); return e ? limpa(e.closest('label').innerText) : ''; }
+    function marcados(n) { return [].map.call(F.querySelectorAll('input[name="' + n + '"]:checked'), function (c) { return limpa(c.closest('label').innerText); }).join(', '); }
+    var mora = (F.querySelector('input[name="mora"]:checked') || {}).value;
+    var lav = (F.querySelector('input[name="lavoro"]:checked') || {}).value;
+    var chi = txt('chi');
+    var pets = [].map.call(F.querySelectorAll('input[name="pet"]:checked'), function (c) {
+      if (c.value === '__outro') return txt('petOutro') || 'Outro';
+      return txt('q_' + c.value) + 'x ' + limpa(c.closest('label').innerText);
+    }).join(', ');
+    var trab = '', empresa = '';
+    if (lav === 'dip') { trab = outro('ruolo'); empresa = txt('azienda'); }
+    else if (lav === 'aut') { trab = outro('attivita') + ' (há ' + txt('anniAut') + ' anos)'; }
+    else if (lav === 'stu') { trab = outro('corso'); empresa = outro('uni'); }
+    var contrato = lav === 'dip' ? txt('contratto') + (el('contratto').value === 'det' ? ' até ' + txt('scadMes') + '/' + txt('scadAno') : '') : '';
+    var d = {
+      'Nome': txt('nome'),
+      'Telefone': txt('tel'),
+      'E-mail': txt('email'),
+      'Idade': txt('idade'),
+      'Gênero': txt('genero'),
+      'Nacionalidade': outro('naz'),
+      'Mora em Turim': mora === 'si' ? 'Sim – ' + txt('tempo') : 'Chega em ' + txt('chegMes') + '/' + txt('chegAno'),
+      'Bairro': outro('zona'),
+      'Endereço do imóvel': txt('indirizzo'),
+      'Aluguel (€)': txt('preco'),
+      'Quer entrar': el('ingMes').value === 'subito' ? 'O quanto antes' : txt('ingMes') + '/' + txt('ingAno'),
+      'Motivo': outro('motivo'),
+      'Duração': txt('durata'),
+      'Trabalho': rad('lavoro'),
+      'Profissão / curso': trab,
+      'Empresa / escola': empresa,
+      'Contrato': contrato,
+      'Renda (€)': lav === 'none' ? '' : txt('reddito'),
+      'Garante': rad('garante'),
+      'Quem vai morar': chi + (chi.indexOf('parceiro') > -1 && txt('partner') ? ' (' + txt('partner') + ')' : '') + (el('chi').value === 'famiglia' || el('chi').value === 'amici' ? ' – ' + txt('num') + ' pessoas' : ''),
+      'Animais': pets || 'Nenhum',
+      'Fuma': rad('fuma'),
+      'Permesso': txt('permesso'),
+      'Referências': rad('ref'),
+      'Já alugou na Itália': txt('storico'),
+      'Garantias': marcados('gar'),
+      'Perfil': marcados('q'),
+      'Assunto': assuntoCarta().replace(/^Oggetto:\s*/, ''),
+      'Carta': textoCarta()
+    };
+    return d;
   }
 
   function enviar() {
@@ -730,15 +759,6 @@ document.addEventListener('keydown',e=>{ const k=e.key.toLowerCase(); if((e.ctrl
       body: JSON.stringify(coletar())
     }).catch(function () { enviado = false; });
   }
-
-  // registra cada entrada (data/hora), mesmo que não termine a carta
-  window.itRegistrarEntrada = function () {
-    if (URL_PLANILHA.indexOf('http') !== 0) return;
-    fetch(URL_PLANILHA, { method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ 'Etapa': 'Entrou no app',
-        'Data/hora': new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' }) }) }).catch(function(){});
-  };
 
   // envia quando aparece "Sua carta está pronta!"
   // ---------- botão "Baixar PDF" ao lado de "Copiar carta" ----------
